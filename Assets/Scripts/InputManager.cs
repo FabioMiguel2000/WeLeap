@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
             _instance = this;
         }
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         playerControls = new PlayerControls();
     }
 
