@@ -15,7 +15,7 @@ namespace Leap.Unity.Interaction.PhysicsHands
         public HandModelBase HandModel => _handModel;
 
         [SerializeField]
-        private float _alpha = 0.02f;
+        private float _alpha = 0.5f;
 
         [SerializeField]
         private float _minimumDistance = 0.02f, _maximumDistance = 0.08f;
