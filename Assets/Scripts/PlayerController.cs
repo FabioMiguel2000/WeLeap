@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public LeftHand leftHand;
+    public float leftHandScaleFactor = 3f;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -34,7 +37,8 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 movement = inputManager.GetPlayerMovement();
+        //Vector3 movement = inputManager.GetPlayerMovement();
+        Vector3 movement = new Vector3(0f, leftHand.y_value * leftHandScaleFactor, 0f);
 
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
 
