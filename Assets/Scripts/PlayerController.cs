@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public LeftHand leftHand;
-    public float leftHandScaleFactor = 3f;
+    public float leftHandScaleFactorX = 6.0f;
+    public float leftHandScaleFactorY = 12.0f;
+    public float leftHandScaleFactorZ = 12.0f;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Vector3 movement = inputManager.GetPlayerMovement();
-        Vector3 movement = new Vector3(leftHand.x_value, leftHand.y_value, leftHand.z_value) * leftHandScaleFactor;
+        Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
 
         Vector3 move = new Vector3(movement.x, movement.y, movement.z);
 
