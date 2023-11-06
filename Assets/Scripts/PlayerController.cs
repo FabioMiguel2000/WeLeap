@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public float leftHandScaleFactorZ = 12.0f;
 
     private CharacterController controller;
-    private Vector3 playerVelocity;
     private bool groundedPlayer;
     [SerializeField]
     private float playerSpeed = 2.0f;
@@ -34,10 +33,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
 
         //Vector3 movement = inputManager.GetPlayerMovement();
         Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
@@ -47,7 +42,5 @@ public class PlayerController : MonoBehaviour
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x + cameraTransform.up * move.y;
 
         controller.Move(move * Time.deltaTime * playerSpeed);
-
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
