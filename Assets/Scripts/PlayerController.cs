@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    public LeftHand leftHand;
+    public float leftHandScaleFactorX = 6.0f;
+    public float leftHandScaleFactorY = 12.0f;
+    public float leftHandScaleFactorZ = 12.0f;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -34,11 +39,12 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector3 movement = inputManager.GetPlayerMovement();
+        //Vector3 movement = inputManager.GetPlayerMovement();
+        Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
 
-        Vector3 move = new Vector3(movement.x, 0f, movement.y);
+        Vector3 move = new Vector3(movement.x, movement.y, movement.z);
 
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
+        move = cameraTransform.forward * move.z + cameraTransform.right * move.x + cameraTransform.up * move.y;
 
         controller.Move(move * Time.deltaTime * playerSpeed);
 
