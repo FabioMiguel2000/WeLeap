@@ -34,12 +34,10 @@ public class PlayerController : MonoBehaviour
     {
         groundedPlayer = controller.isGrounded;
 
-        //Vector3 movement = inputManager.GetPlayerMovement();
-        Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
+        //Vector3 move = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
+        Vector3 movement = inputManager.GetPlayerMovement();
 
-        Vector3 move = new Vector3(movement.x, movement.y, movement.z);
-
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x + cameraTransform.up * move.y;
+        Vector3 move = cameraTransform.forward * movement.z + cameraTransform.right * movement.x + cameraTransform.up * movement.y;
 
         controller.Move(move * Time.deltaTime * playerSpeed);
     }
