@@ -55,4 +55,11 @@ public class InputManager : MonoBehaviour
     {
         return playerControls.Player.Trigger.WasReleasedThisFrame();
     }
+    public bool GetTriggerWasPressedThisFrame()
+    {
+        return playerControls.Player.Trigger.WasPressedThisFrame();
+    }
+    public bool GetTriggerIsPressed(){
+        return playerControls.Player.Trigger.IsPressed();
+    }
 }

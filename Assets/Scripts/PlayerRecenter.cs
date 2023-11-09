@@ -11,9 +11,6 @@ namespace Leap.Unity.Interaction.PhysicsHands.Example
         [SerializeField] private GameObject player;
         private InputManager inputManager;
 
-
-        private int _initialFrames = 2;
-
         public void Start()
         {
             inputManager = InputManager.Instance;
@@ -21,11 +18,11 @@ namespace Leap.Unity.Interaction.PhysicsHands.Example
 
         private void Update()
         {
-            if (inputManager.GetTriggerWasReleasedThisFrame())
-            {
-                Debug.Log("Released!");
-                Recenter();
-            }
+            // if (inputManager.GetTriggerWasReleasedThisFrame())
+            // {
+            //     Debug.Log("Released!");
+            //     Recenter();
+            // }
         }
 
         public void Recenter()
