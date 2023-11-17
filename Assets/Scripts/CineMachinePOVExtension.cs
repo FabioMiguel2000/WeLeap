@@ -10,9 +10,9 @@ public class CineMachinePOVExtension : CinemachineExtension
     [SerializeField]
     private float clampAngle = 80f;
     [SerializeField]
-    private float verticalSpeed = 100; // Look around speed in the vertical axis
+    private float verticalSpeed = 2.5f; // Look around speed in the vertical axis
     [SerializeField]
-    private float horizontalSpeed = 100; // Look around speed in the horizontal axis
+    private float horizontalSpeed = 2.5f; // Look around speed in the horizontal axis
 
 
     private InputManager inputManager;
@@ -52,7 +52,7 @@ public class CineMachinePOVExtension : CinemachineExtension
         //    return;
         //}
 
-        deltaTipPosition =  _middle.TipPosition- lastTipPosition;
+        deltaTipPosition =  _middle.TipPosition - lastTipPosition;
 
         lastTipPosition = _middle.TipPosition;
 
@@ -89,24 +89,24 @@ public class CineMachinePOVExtension : CinemachineExtension
 
                 //print(_middle.TipPosition);
 
-                //Vector2 deltaInput = inputManager.GetMouseDelta();
+                Vector2 deltaInput = inputManager.GetMouseDelta();
                 if (deltaTipPosition.x != 0)
                 {
-                    print(deltaTipPosition.x * 35000);
+                    print(deltaTipPosition.x * 10000 * horizontalSpeed);
 
                 }
                 if (deltaTipPosition.y != 0)
                 {
-                    print(deltaTipPosition.y * 25000);
+                    print(deltaTipPosition.y * 10000 * verticalSpeed);
 
                 }
 
-                startingRotation.x += deltaTime * 50000 * deltaTipPosition.x;
-                startingRotation.y += deltaTime * 25000 * deltaTipPosition.y;
+                startingRotation.x += deltaTime * 10000 * horizontalSpeed * deltaTipPosition.x;
+                startingRotation.y += deltaTime * 10000 * verticalSpeed * deltaTipPosition.y;
 
                 //print(100 * deltaInput.x);
-                //startingRotation.x += deltaTime * 100 * deltaInput.x;
-                //startingRotation.y += deltaTime * 100 * deltaInput.y;
+                startingRotation.x += deltaTime * 100 * deltaInput.x;
+                startingRotation.y += deltaTime * 100 * deltaInput.y;
 
                 startingRotation.y = Mathf.Clamp(startingRotation.y, -clampAngle, clampAngle);
 
