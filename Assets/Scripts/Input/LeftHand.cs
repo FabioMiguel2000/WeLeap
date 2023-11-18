@@ -30,7 +30,7 @@ public class LeftHand : MonoBehaviour
     private void Update()
     {
         Hand leftHand = Hands.Provider.GetHand(Chirality.Left);
-        List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
+        //List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
 
         if (leftHand != null)
         {

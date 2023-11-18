@@ -32,10 +32,19 @@ public class CameraController : MonoBehaviour
 
         rotY += mouseInfo.x * cameraSpeed * Time.deltaTime;
 
+        print(inOrbit);
         if (inOrbit) {
+            orbitCentre.transform.RotateAround(orbitCentre.transform.position, Vector3.up, mouseInfo.x * cameraSpeed * Time.deltaTime);
             transform.RotateAround(orbitCentre.transform.position, Vector3.up, mouseInfo.x * cameraSpeed * Time.deltaTime);
-            orbitCentre.transform.Rotate(new Vector3(0, mouseInfo.x * cameraSpeed * Time.deltaTime, 0));
+            
+            float newYAngle = transform.eulerAngles.x - mouseInfo.y * cameraSpeed * Time.deltaTime;
+            //print(newYAngle);
+            //if (newYAngle < maxYAngle && newYAngle > minYAngle)
             transform.RotateAround(orbitCentre.transform.position, orbitCentre.transform.right, -mouseInfo.y * cameraSpeed * Time.deltaTime);
-        }else transform.localRotation = Quaternion.Euler(rotX, rotY, 0);
+            
+        }else {
+            transform.RotateAround(transform.position, Vector3.up, mouseInfo.x * cameraSpeed * Time.deltaTime);
+            transform.RotateAround(transform.position, transform.right, -mouseInfo.y * cameraSpeed * Time.deltaTime);
+        }
     }
 }
