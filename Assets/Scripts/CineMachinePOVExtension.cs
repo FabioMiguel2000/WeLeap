@@ -14,59 +14,15 @@ public class CineMachinePOVExtension : CinemachineExtension
     [SerializeField]
     private float horizontalSpeed = 2.5f; // Look around speed in the horizontal axis
 
-
     private InputManager inputManager;
     private Vector3 startingRotation;
-    private Vector3 lastTipPosition;
-    private Vector3 deltaTipPosition;
-    GameObject playerObject;
+    public GameObject playerObject;
+
 
     protected override void Awake()
     {
-        //GameObject[] playerObject = GameObject.FindGameObjectsWithTag("Player");
         inputManager = InputManager.Instance;
-        lastTipPosition = new Vector3(0, 0, 0);
         base.Awake();
-    }
-
-    private void Update()
-    {
-        Hand rightHand = Hands.Provider.GetHand(Chirality.Right);
-        //List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
-        if (rightHand == null)
-        {
-            deltaTipPosition = new Vector3(0, 0, 0);
-            return;
-        }
-
-        //Vector3 rightHandVector = rightHand.Basis.translation.Pivot(Camera.main.transform.position, Quaternion.Inverse(Camera.main.transform.rotation)) - playerObject.transform.position;
-
-
-        Finger _middle = rightHand.GetMiddle();
-
-
-        //if (lastTipPosition == null)
-        //{
-        //    lastTipPosition = _middle.TipPosition;
-        //    deltaTipPosition = new Vector3(0, 0, 0);
-        //    return;
-        //}
-
-        deltaTipPosition =  _middle.TipPosition - lastTipPosition;
-
-        lastTipPosition = _middle.TipPosition;
-
-
-
-        //Vector3 positionChange = lastTipPosition - rightHandVector;
-
-        //lastTipPosition = rightHandVector;
-
-        //deltaTipPosition = new Vector2(positionChange.x, positionChange.y);
-
-        //print(deltaTipPosition);
-
-
     }
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
@@ -78,31 +34,14 @@ public class CineMachinePOVExtension : CinemachineExtension
                 if (startingRotation == null)
                 {
                     startingRotation = transform.localRotation.eulerAngles;
-
-
                 }
 
-                //Hand rightHand = Hands.Provider.GetHand(Chirality.Right);
-                //List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
-
-                //Finger _middle = rightHand.GetMiddle();
-
-                //print(_middle.TipPosition);
+                RightHand rightHand = GameObject.FindGameObjectWithTag("Player").GetComponent<RightHand>();
 
                 Vector2 deltaInput = inputManager.GetMouseDelta();
-                if (deltaTipPosition.x != 0)
-                {
-                    print(deltaTipPosition.x * 10000 * horizontalSpeed);
 
-                }
-                if (deltaTipPosition.y != 0)
-                {
-                    print(deltaTipPosition.y * 10000 * verticalSpeed);
-
-                }
-
-                startingRotation.x += deltaTime * 10000 * horizontalSpeed * deltaTipPosition.x;
-                startingRotation.y += deltaTime * 10000 * verticalSpeed * deltaTipPosition.y;
+                startingRotation.x += deltaTime  *10000* horizontalSpeed * rightHand.GetDeltaPosition().x;
+                startingRotation.y += deltaTime  * 10000*verticalSpeed * rightHand.GetDeltaPosition().y;
 
                 //print(100 * deltaInput.x);
                 startingRotation.x += deltaTime * 100 * deltaInput.x;
