@@ -36,47 +36,65 @@ public class IndicatorScript : MonoBehaviour
     public void EnableIndicator()
     {
         triggerOn = true;
-        print("enabled");
     }
 
-    public void DisableIndicator()
-    {
-        triggerOn = false;
-        print("disabled");
+    //public void DisableIndicator()
+    //{
+    //    triggerOn = false;
 
+    //}
+
+    public void OnTriggerRelease()
+    {
+        if (cam.inOrbit)
+        {
+            cam.inOrbit = false;
+            triggerOn = false;
+            Destroy(cam.orbitCentre);
+        }
+        else
+        {
+            cam.inOrbit = true;
+            GameObject orbitCentre = Instantiate(orbitCentreObject);
+            orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            //player.transform.SetParent(orbitCentre.transform);                
+            cam.orbitCentre = orbitCentre;
+        }
+
+        incrementsSum = 0;
+        transform.position = player.transform.position;
     }
 
     private void Update(){
-        if (triggerOn)
-        {
-            print("hello");
-            return;
-        }
-        if (inputManager.GetTriggerIsPressed() && !cam.inOrbit){
+
+
+        if ((inputManager.GetTriggerIsPressed() || triggerOn )&& !cam.inOrbit){
             float increment = incrementRate * Time.deltaTime;
             incrementsSum += increment;
             Debug.Log(incrementsSum);
 
             transform.position = player.transform.position + Camera.main.transform.forward * incrementsSum;
-        }else{
-            if (inputManager.GetTriggerWasReleasedThisFrame()){
-                //transform.localScale = new Vector3 (transform.localScale.x, 0, transform.localScale.z);\
-
-                if (cam.inOrbit) {
-                    cam.inOrbit = false;
-                    Destroy(cam.orbitCentre);
-                }
-                else{
-                    cam.inOrbit = true;
-                    GameObject orbitCentre = Instantiate(orbitCentreObject);
-                    orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
-                    //player.transform.SetParent(orbitCentre.transform);                
-                    cam.orbitCentre = orbitCentre;
-                }
-
-                incrementsSum = 0;
-                transform.position = player.transform.position;
-            }
         }
+        //else{
+        //    if (inputManager.GetTriggerWasReleasedThisFrame() || !triggerOn)
+        //    {
+        //        //transform.localScale = new Vector3 (transform.localScale.x, 0, transform.localScale.z);\
+
+        //        if (cam.inOrbit) {
+        //            cam.inOrbit = false;
+        //            Destroy(cam.orbitCentre);
+        //        }
+        //        else{
+        //            cam.inOrbit = true;
+        //            GameObject orbitCentre = Instantiate(orbitCentreObject);
+        //            orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        //            //player.transform.SetParent(orbitCentre.transform);                
+        //            cam.orbitCentre = orbitCentre;
+        //        }
+
+        //        incrementsSum = 0;
+        //        transform.position = player.transform.position;
+        //    }
+        //}
     }
 }
