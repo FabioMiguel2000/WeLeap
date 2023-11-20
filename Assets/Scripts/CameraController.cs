@@ -23,11 +23,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Vector2 mouseInfo = inputManager.GetMouseDelta();
-
         RightHand rightHand = GameObject.FindGameObjectWithTag("Player").GetComponent<RightHand>();
+        //Vector2 mouseInfo = inputManager.GetMouseDelta();
+        Vector2 mouseInfo = new Vector2(rightHand.GetDeltaPosition().x, rightHand.GetDeltaPosition().y);
 
-
+        print(rightHand.GetDeltaPosition().x * cameraSpeed);
 
         //rotX += -mouseInfo.y * cameraSpeed * Time.deltaTime;
         rotX += -rightHand.GetDeltaPosition().x * cameraSpeed * Time.deltaTime;
