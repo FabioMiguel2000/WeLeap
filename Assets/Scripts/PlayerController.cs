@@ -11,14 +11,11 @@ public class PlayerController : MonoBehaviour
     public float leftHandScaleFactorZ = 12.0f;
 
     private CharacterController controller;
-    private Vector3 playerVelocity;
+    private CameraController cam;
+
     private bool groundedPlayer;
     [SerializeField]
     private float playerSpeed = 2.0f;
-    [SerializeField]
-    private float jumpHeight = 1.0f;
-    [SerializeField]
-    private float gravityValue = -9.81f;
 
     private Transform cameraTransform;
 
@@ -29,25 +26,19 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         inputManager = InputManager.Instance;
         cameraTransform = Camera.main.transform;
+        cam = gameObject.GetComponent<CameraController>();
     }
 
     void Update()
     {
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
 
-        //Vector3 movement = inputManager.GetPlayerMovement();
         Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
+        //Vector3 movement = inputManager.GetPlayerMovement();
 
-        Vector3 move = new Vector3(movement.x, movement.y, movement.z);
-
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x + cameraTransform.up * move.y;
-
+        Vector3 move;
+        if (cam.inOrbit) move = cameraTransform.forward * movement.z;
+        else move = cameraTransform.forward * movement.z + cameraTransform.right * movement.x + cameraTransform.up * movement.y;
         controller.Move(move * Time.deltaTime * playerSpeed);
-
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
