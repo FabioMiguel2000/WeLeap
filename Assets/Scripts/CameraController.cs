@@ -25,11 +25,18 @@ public class CameraController : MonoBehaviour
     {
         Vector2 mouseInfo = inputManager.GetMouseDelta();
 
-        rotX += -mouseInfo.y * cameraSpeed * Time.deltaTime;
+        RightHand rightHand = GameObject.FindGameObjectWithTag("Player").GetComponent<RightHand>();
+
+
+
+        //rotX += -mouseInfo.y * cameraSpeed * Time.deltaTime;
+        rotX += -rightHand.GetDeltaPosition().x * cameraSpeed * Time.deltaTime;
+
         // clamp the vertical rotation
         rotX = Mathf.Clamp(rotX, minYAngle, maxYAngle);
 
-        rotY += mouseInfo.x * cameraSpeed * Time.deltaTime;
+        rotY += rightHand.GetDeltaPosition().y * cameraSpeed * Time.deltaTime;
+        //rotY += mouseInfo.x * cameraSpeed * Time.deltaTime;
 
         float newYAngle = transform.eulerAngles.x - mouseInfo.y * cameraSpeed * Time.deltaTime;
         //print(newYAngle);
