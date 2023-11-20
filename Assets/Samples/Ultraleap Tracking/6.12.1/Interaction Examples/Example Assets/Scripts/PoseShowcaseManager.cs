@@ -42,11 +42,14 @@ namespace Leap.Unity.Examples
 
         public void PoseDetected(string inputString)
         {
+            print(inputString);
+
             TurnOnGreenLight(inputString);
         }
 
         private void TurnOnGreenLight(string inputString)
         {
+            print("hello");
             foreach (var pose in poseList)
             {
                 if (string.Equals(inputString, pose.poseName, StringComparison.OrdinalIgnoreCase))

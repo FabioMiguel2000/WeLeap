@@ -16,6 +16,7 @@ namespace Leap.Unity.Examples
             HandPoseScriptableObject detectedPose = detector.GetCurrentlyDetectedPose();
             if (detectedPose != null)
             {
+                print("hello");
                 textGameobject.SetActive(true);
                 text.text = "Detected pose: " + detectedPose.name;
             }

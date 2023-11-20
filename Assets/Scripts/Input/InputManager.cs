@@ -62,4 +62,5 @@ public class InputManager : MonoBehaviour
     public bool GetTriggerIsPressed(){
         return playerControls.Player.Trigger.IsPressed();
     }
+
 }

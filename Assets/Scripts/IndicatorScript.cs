@@ -14,10 +14,12 @@ public class IndicatorScript : MonoBehaviour
     GameObject orbitCentreObject;
     InputManager inputManager;
     CameraController cam;
+    private bool triggerOn;
 
     private void Start(){
         inputManager = InputManager.Instance;
         cam = player.GetComponent<CameraController>();
+        triggerOn = false;
     }
 
     // private void Update(){
@@ -31,7 +33,25 @@ public class IndicatorScript : MonoBehaviour
     //     }
     // }
 
+    public void EnableIndicator()
+    {
+        triggerOn = true;
+        print("enabled");
+    }
+
+    public void DisableIndicator()
+    {
+        triggerOn = false;
+        print("disabled");
+
+    }
+
     private void Update(){
+        if (triggerOn)
+        {
+            print("hello");
+            return;
+        }
         if (inputManager.GetTriggerIsPressed() && !cam.inOrbit){
             float increment = incrementRate * Time.deltaTime;
             incrementsSum += increment;

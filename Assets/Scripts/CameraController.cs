@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
         rotY += mouseInfo.x * cameraSpeed * Time.deltaTime;
 
         float newYAngle = transform.eulerAngles.x - mouseInfo.y * cameraSpeed * Time.deltaTime;
-        print(newYAngle);
+        //print(newYAngle);
 
         if (inOrbit) {
             orbitCentre.transform.RotateAround(orbitCentre.transform.position, Vector3.up, mouseInfo.x * cameraSpeed * Time.deltaTime);

@@ -58,7 +58,7 @@ public class LeftHand : MonoBehaviour
             if (Mathf.Abs(x_value) < deadzoneThreshold) x_value = 0f;
             else if (x_value > valueMax) x_value = valueMax;
             else if (x_value < valueMin) x_value = valueMin;
-            Debug.Log(x_value);
+            //Debug.Log(x_value);
         }
         else
         {
