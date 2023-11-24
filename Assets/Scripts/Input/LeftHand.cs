@@ -39,7 +39,7 @@ public class LeftHand : MonoBehaviour
             Vector3 leftHandVector = leftHand.Basis.translation.Pivot(Camera.main.transform.position, Quaternion.Inverse(Camera.main.transform.rotation)) - playerObject.transform.position;
 
             y_value = leftHandVector.y + y_valueOffset;
-            if (Mathf.Abs(x_value) < deadzoneThreshold) y_value = 0f;
+            if (Mathf.Abs(y_value) < deadzoneThreshold) y_value = 0f;
             else if (y_value > valueMax) y_value = valueMax;
             else if (y_value < valueMin) y_value = valueMin;
 
