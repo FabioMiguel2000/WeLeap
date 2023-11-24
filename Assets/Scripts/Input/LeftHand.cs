@@ -43,22 +43,21 @@ public class LeftHand : MonoBehaviour
             else if (y_value > valueMax) y_value = valueMax;
             else if (y_value < valueMin) y_value = valueMin;
 
-            z_value = leftHandVector.z + z_valueOffset;
-            if (Mathf.Abs(x_value) < deadzoneThreshold) z_value = 0f;
-            else if (z_value > valueMax) z_value = valueMax;
-            else if (z_value < valueMin) z_value = valueMin;
-
-
-            // Hand Tilt for X movement
+            // Hand Tilt for X and Z movement
             // Undo Camera rotation
             Vector3 leftHandPalmNormal = leftHand.PalmNormal.Pivot(Vector3.zero, Quaternion.Inverse(Camera.main.transform.rotation));
-            // Invert value
+
+            // Invert values
             x_value = (-1) * leftHandPalmNormal.x + x_valueOffset;
+            z_value = (-1) * leftHandPalmNormal.z + z_valueOffset;
 
             if (Mathf.Abs(x_value) < deadzoneThreshold) x_value = 0f;
             else if (x_value > valueMax) x_value = valueMax;
             else if (x_value < valueMin) x_value = valueMin;
-            //Debug.Log(x_value);
+            
+            if (Mathf.Abs(z_value) < deadzoneThreshold) z_value = 0f;
+            else if (z_value > valueMax) z_value = valueMax;
+            else if (z_value < valueMin) z_value = valueMin;
         }
         else
         {
