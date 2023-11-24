@@ -11,12 +11,18 @@ public class RightHand : MonoBehaviour
     public float valueMax;
     public float valueMin;
     public float deadzoneThreshold = 0.01f;
+    private bool inFist;
     GameObject playerObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        if (playerObjects.Length > 1)
+        {
+            Debug.LogWarning("There is more than on object with the tag Player");
+        }
+        playerObject = playerObjects[0];    
     }
 
     // Update is called once per frame
@@ -24,7 +30,7 @@ public class RightHand : MonoBehaviour
     {
         Hand rightHand = Hands.Provider.GetHand(Chirality.Right);
 
-        if (rightHand != null)
+        if (rightHand != null && !inFist)
         {
             // Undo Camera rotation
             Vector3 rightHandVector = rightHand.Direction.Pivot(Vector3.zero, Quaternion.Inverse(Camera.main.transform.rotation));
@@ -46,5 +52,12 @@ public class RightHand : MonoBehaviour
             y_value = 0f;
         }
 
+    }
+
+    public void OnFistEnter(){
+        inFist = true;
+    }
+    public void OnFistExit(){
+        inFist = false;
     }
 }

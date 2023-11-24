@@ -1,6 +1,5 @@
 using Leap;
 using Leap.Unity;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LeftHand : MonoBehaviour
@@ -14,10 +13,11 @@ public class LeftHand : MonoBehaviour
     public float valueMax;
     public float valueMin;
     public float deadzoneThreshold = 0.01f;
+    private bool inFist;
 
     GameObject playerObject;
 
-    private void Start()
+    void Start()
     {
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         if (playerObjects.Length > 1)
@@ -27,12 +27,12 @@ public class LeftHand : MonoBehaviour
         playerObject = playerObjects[0];
     }
 
-    private void Update()
+    void Update()
     {
         Hand leftHand = Hands.Provider.GetHand(Chirality.Left);
         //List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
 
-        if (leftHand != null)
+        if (leftHand != null && !inFist)
         {
             // Hand position for Z and Y movement
             // Undo Camera rotation and Player translation
@@ -66,5 +66,12 @@ public class LeftHand : MonoBehaviour
             y_value = 0f;
             z_value = 0f;
         }
+    }
+
+    public void OnFistEnter(){
+        inFist = true;
+    }
+    public void OnFistExit(){
+        inFist = false;
     }
 }
