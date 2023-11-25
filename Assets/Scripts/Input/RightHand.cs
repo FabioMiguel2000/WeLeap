@@ -43,8 +43,6 @@ public class RightHand : MonoBehaviour
             if (Mathf.Abs(y_value) < deadzoneThreshold) y_value = 0f;
             else if (y_value > valueMax) y_value = valueMax;
             else if (y_value < valueMin) y_value = valueMin;
-            
-            Debug.Log(new Vector2 (x_value, y_value));
         }
         else
         {
@@ -56,8 +54,10 @@ public class RightHand : MonoBehaviour
 
     public void OnFistEnter(){
         inFist = true;
+        Debug.Log("Right Hand in Fist");
     }
     public void OnFistExit(){
         inFist = false;
+        Debug.Log("Right Hand NOT in Fist");
     }
 }
