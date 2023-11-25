@@ -4336,6 +4336,7 @@ MonoBehaviour:
   leftHandScaleFactorX: 6
   leftHandScaleFactorY: 12
   leftHandScaleFactorZ: 6
+  minimumOrbitDistance: 2
   playerSpeed: 4
 --- !u!143 &1305324176
 CharacterController:
