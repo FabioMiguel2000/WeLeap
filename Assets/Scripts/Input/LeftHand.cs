@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class LeftHand : HandScript
 {
-    void Update()
+    protected override void OnUpdateFrame(Frame frame)
     {
-        Hand leftHand = Hands.Provider.GetHand(Chirality.Left);
-        //List<Hand> _allHands = Hands.Provider.CurrentFrame.Hands;
+        //Use a helpful utility function to get the first hand that matches the Chirality
+        Hand leftHand = frame.GetHand(Chirality.Left);
 
         if (leftHand != null && !inFist)
         {
-            // Hand position for Z and Y movement
+            // Hand position for Y movement
             // Undo Camera rotation and Player translation
             Vector3 leftHandVector = leftHand.Basis.translation.Pivot(Camera.main.transform.position, Quaternion.Inverse(Camera.main.transform.rotation)) - playerObject.transform.position;
 

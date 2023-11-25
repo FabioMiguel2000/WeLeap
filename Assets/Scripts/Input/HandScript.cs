@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HandScript : MonoBehaviour
 {
+    public LeapProvider leapProvider;
     public float x_value;
     public float y_value;
     public float z_value;
@@ -46,4 +47,14 @@ public class HandScript : MonoBehaviour
 
         return newValue;
     }
+
+    protected void OnEnable()
+    {
+        leapProvider.OnUpdateFrame += OnUpdateFrame;
+    }
+    protected void OnDisable()
+    {
+        leapProvider.OnUpdateFrame -= OnUpdateFrame;
+    }
+    protected virtual void OnUpdateFrame (Frame frame){}
 }

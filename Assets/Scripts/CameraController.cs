@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leap;
+using Leap.Unity;
 
-[RequireComponent(typeof(CharacterController))]
 public class CameraController : MonoBehaviour
 {
     public RightHand rightHand;
+    public LeapProvider leapProvider;
 
     // Camera
     public float cameraSpeed = 12.0f;
@@ -21,7 +23,7 @@ public class CameraController : MonoBehaviour
         inputManager = InputManager.Instance;
     }
 
-    void Update()
+    void Update ()
     {
         //Vector2 mouseInfo = inputManager.GetMouseDelta();
         Vector2 mouseInfo = new Vector2(rightHand.x_value, rightHand.y_value) * 15f;

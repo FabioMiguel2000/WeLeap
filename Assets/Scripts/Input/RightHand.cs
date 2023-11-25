@@ -4,9 +4,10 @@ using Leap;
 
 public class RightHand : HandScript
 {
-    void Update()
+    protected override void OnUpdateFrame(Frame frame)
     {
-        Hand rightHand = Hands.Provider.GetHand(Chirality.Right);
+        //Use a helpful utility function to get the first hand that matches the Chirality
+        Hand rightHand = frame.GetHand(Chirality.Right);
 
         if (rightHand != null && !inFist)
         {
