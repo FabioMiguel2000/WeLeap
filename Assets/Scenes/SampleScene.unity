@@ -474,7 +474,7 @@ MonoBehaviour:
   z_valueOffset: 0
   valueMax: 0.4
   valueMin: -0.4
-  deadzoneThreshold: 0.01
+  deadzoneThreshold: 0.075
 --- !u!114 &137734396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,11 +489,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x_value: 0
   y_value: 0
-  x_value_offset: 0.5
-  y_value_offset: 0
+  z_value: 0
+  x_valueOffset: 0.4
+  y_valueOffset: 0
+  z_valueOffset: 0
   valueMax: 0.4
   valueMin: -0.4
-  deadzoneThreshold: 0.05
+  deadzoneThreshold: 0.075
 --- !u!1 &165921205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4334,7 +4336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 137734395}
   leftHandScaleFactorX: 6
-  leftHandScaleFactorY: 12
+  leftHandScaleFactorY: 48
   leftHandScaleFactorZ: 6
   minimumOrbitDistance: 2
   playerSpeed: 4

@@ -2,30 +2,8 @@
 using Leap.Unity;
 using Leap;
 
-public class RightHand : MonoBehaviour
+public class RightHand : HandScript
 {
-    public float x_value;
-    public float y_value;
-    public float x_value_offset;
-    public float y_value_offset;
-    public float valueMax;
-    public float valueMin;
-    public float deadzoneThreshold = 0.01f;
-    private bool inFist;
-    GameObject playerObject;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-        if (playerObjects.Length > 1)
-        {
-            Debug.LogWarning("There is more than on object with the tag Player");
-        }
-        playerObject = playerObjects[0];    
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Hand rightHand = Hands.Provider.GetHand(Chirality.Right);
@@ -34,15 +12,8 @@ public class RightHand : MonoBehaviour
         {
             // Undo Camera rotation
             Vector3 rightHandVector = rightHand.Direction.Pivot(Vector3.zero, Quaternion.Inverse(Camera.main.transform.rotation));
-            x_value = rightHandVector.x + x_value_offset;
-            if (Mathf.Abs(x_value) < deadzoneThreshold) x_value = 0f;
-            else if (x_value > valueMax) x_value = valueMax;
-            else if (x_value < valueMin) x_value = valueMin;
-
-            y_value = rightHandVector.y + y_value_offset;
-            if (Mathf.Abs(y_value) < deadzoneThreshold) y_value = 0f;
-            else if (y_value > valueMax) y_value = valueMax;
-            else if (y_value < valueMin) y_value = valueMin;
+            x_value = ProcessValue(rightHandVector.x + x_valueOffset);
+            y_value = ProcessValue(rightHandVector.y + y_valueOffset);
         }
         else
         {
@@ -50,14 +21,5 @@ public class RightHand : MonoBehaviour
             y_value = 0f;
         }
 
-    }
-
-    public void OnFistEnter(){
-        inFist = true;
-        Debug.Log("Right Hand in Fist");
-    }
-    public void OnFistExit(){
-        inFist = false;
-        Debug.Log("Right Hand NOT in Fist");
     }
 }
