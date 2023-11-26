@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     void Update ()
     {
         Vector3 movement = new Vector3(leftHand.x_value * leftHandScaleFactorX, leftHand.y_value * leftHandScaleFactorY, leftHand.z_value * leftHandScaleFactorZ);
-        //Vector3 movement = inputManager.GetPlayerMovement();
+        movement = inputManager.GetPlayerMovement();
 
         Vector3 move;
         if (cam.inOrbit){
