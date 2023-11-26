@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leap;
+using Leap.Unity;
 
-[RequireComponent(typeof(CharacterController))]
 public class CameraController : MonoBehaviour
 {
+    public RightHand rightHand;
+    public LeapProvider leapProvider;
+
     // Camera
     public float cameraSpeed = 12.0f;
     public float minYAngle = -90.0f;
     public float maxYAngle = 90.0f;
-    private float rotX;
-    private float rotY;
     public bool inOrbit;
     public GameObject orbitCentre;
 
@@ -21,18 +23,12 @@ public class CameraController : MonoBehaviour
         inputManager = InputManager.Instance;
     }
 
-    void Update()
+    void Update ()
     {
-        Vector2 mouseInfo = inputManager.GetMouseDelta();
-
-        rotX += -mouseInfo.y * cameraSpeed * Time.deltaTime;
-        // clamp the vertical rotation
-        rotX = Mathf.Clamp(rotX, minYAngle, maxYAngle);
-
-        rotY += mouseInfo.x * cameraSpeed * Time.deltaTime;
+        //Vector2 mouseInfo = inputManager.GetMouseDelta();
+        Vector2 mouseInfo = new Vector2(rightHand.x_value, rightHand.y_value) * 15f;
 
         float newYAngle = transform.eulerAngles.x - mouseInfo.y * cameraSpeed * Time.deltaTime;
-        print(newYAngle);
 
         if (inOrbit) {
             orbitCentre.transform.RotateAround(orbitCentre.transform.position, Vector3.up, mouseInfo.x * cameraSpeed * Time.deltaTime);

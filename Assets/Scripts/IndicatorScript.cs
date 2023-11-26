@@ -14,48 +14,51 @@ public class IndicatorScript : MonoBehaviour
     GameObject orbitCentreObject;
     InputManager inputManager;
     CameraController cam;
+    private bool triggerOn;
 
     private void Start(){
         inputManager = InputManager.Instance;
         cam = player.GetComponent<CameraController>();
+        triggerOn = false;
     }
 
-    // private void Update(){
-    //     if (inputManager.GetTriggerIsPressed()){
-    //         float scaleIncrement = incrementRate * Time.deltaTime;
-    //         transform.localScale += new Vector3 (0, scaleIncrement, 0);
-    //     }else{
-    //         if (inputManager.GetTriggerWasReleasedThisFrame()){
-    //             transform.localScale = new Vector3 (transform.localScale.x, 0, transform.localScale.z);
-    //         }
-    //     }
-    // }
+    public void OnTriggerEnter()
+    {
+        triggerOn = true;
+    }
+
+    public void OnTriggerRelease()
+    {
+        if (cam.inOrbit)
+        {
+            cam.inOrbit = false;
+            triggerOn = false;
+            Destroy(cam.orbitCentre);
+        }
+        else
+        {
+            cam.inOrbit = true;
+            GameObject orbitCentre = Instantiate(orbitCentreObject);
+            orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            //player.transform.SetParent(orbitCentre.transform);                
+            cam.orbitCentre = orbitCentre;
+        }
+
+        incrementsSum = 0;
+        transform.position = player.transform.position;
+    }
 
     private void Update(){
-        if (inputManager.GetTriggerIsPressed() && !cam.inOrbit){
+        if ((inputManager.GetTriggerIsPressed() || triggerOn) && !cam.inOrbit){
             float increment = incrementRate * Time.deltaTime;
             incrementsSum += increment;
             Debug.Log(incrementsSum);
 
             transform.position = player.transform.position + Camera.main.transform.forward * incrementsSum;
-        }else{
-            if (inputManager.GetTriggerWasReleasedThisFrame()){
-                //transform.localScale = new Vector3 (transform.localScale.x, 0, transform.localScale.z);\
-
-                if (cam.inOrbit) {
-                    cam.inOrbit = false;
-                    Destroy(cam.orbitCentre);
-                }
-                else{
-                    cam.inOrbit = true;
-                    GameObject orbitCentre = Instantiate(orbitCentreObject);
-                    orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
-                    //player.transform.SetParent(orbitCentre.transform);                
-                    cam.orbitCentre = orbitCentre;
-                }
-
-                incrementsSum = 0;
-                transform.position = player.transform.position;
+        }
+        else{
+            if (inputManager.GetTriggerWasReleasedThisFrame() && cam.inOrbit){
+                OnTriggerRelease();
             }
         }
     }
