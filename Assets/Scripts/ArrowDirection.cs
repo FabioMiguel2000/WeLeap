@@ -23,9 +23,6 @@ public class ArrowDirection : MonoBehaviour
 
         // Update lastPosition for the next frame
         lastPosition = player.transform.position;
-        // Get the player's velocity
-
-        print(currentVelocity);
 
         // If the player is moving
         if (currentVelocity != Vector3.zero)
