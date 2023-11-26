@@ -30,12 +30,14 @@ public class ArrowDirection : MonoBehaviour
         // If the player is moving
         if (currentVelocity != Vector3.zero)
         {
+            arrow.GetChild(0).gameObject.SetActive(true);
             // Rotate the arrow to point in the direction of the player's movement
             arrow.rotation = Quaternion.LookRotation(currentVelocity);
         }
-        //else
-        //{
-        //    arrow.gameObject.SetActive(false);
-        //}
+        else
+        {
+            arrow.GetChild(0).gameObject.SetActive(false);
+
+        }
     }
 }
