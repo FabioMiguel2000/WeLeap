@@ -1,0 +1,3 @@
+[submodule "Assets/TestsSharedFolder"]
+	path = Assets/TestsSharedFolder
+	url = https://github.com/luismrguimaraes/TAIM-Tests-Shared.git
