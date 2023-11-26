@@ -14,12 +14,14 @@ public class IndicatorScript : MonoBehaviour
     GameObject orbitCentreObject;
     InputManager inputManager;
     CameraController cam;
+    ModeUI modeUI;
     private bool triggerOn;
 
     private void Start(){
         inputManager = InputManager.Instance;
         cam = player.GetComponent<CameraController>();
         triggerOn = false;
+        modeUI = GameObject.FindGameObjectWithTag("UI Manager").transform.Find("Mode").GetComponent<ModeUI>();
     }
 
     public void OnTriggerEnter()
@@ -31,12 +33,14 @@ public class IndicatorScript : MonoBehaviour
     {
         if (cam.inOrbit)
         {
+            modeUI.ChangeMode(0);
             cam.inOrbit = false;
             triggerOn = false;
             Destroy(cam.orbitCentre);
         }
         else
         {
+            modeUI.ChangeMode(1);
             cam.inOrbit = true;
             GameObject orbitCentre = Instantiate(orbitCentreObject);
             orbitCentre.transform.SetPositionAndRotation(transform.position, transform.rotation);
