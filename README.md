@@ -3,3 +3,6 @@
 ## Pre-requisites
 - Leap Motion Controller (hardware)
 - Ultraleap Hand Tracking Service - v5 (software)
+
+## Demo Video
+- ![](./Demo.mov)
