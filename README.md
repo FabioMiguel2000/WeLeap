@@ -13,7 +13,11 @@ https://github.com/FabioMiguel2000/Leap-Motion-3D-Navigation/assets/100025288/e6
 - Ultraleap Hand Tracking Service - v5 (software)
 
 ## User Interface
-https://github.com/FabioMiguel2000/blob/main/img/user_interface.png
+
+<p align="center">
+   <img width="412" alt="image" src="https://github.com/FabioMiguel2000/blob/main/img/user_interface.png">
+</p>
+
 
 ## Navigation Control
 
