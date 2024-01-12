@@ -50,3 +50,6 @@ the mode back to navigation.
 A special thanks to [Francisco Cerqueira](https://github.com/xico2001pt) and [Vasco Alves](https://github.com/Vasco52) for their efforts in developing the competing system [WiiFly](https://github.com/xico2001pt/wiifly-3d-navigation). The development of both systems was carried out in parallel, with the goal of comparing the two approaches in a user study.
 
 ## License 
+This project is licensed under the Apache License, Version 2.0.
+
+For the complete text of the Apache License, please refer to the [Apache License](https://github.com/FabioMiguel2000/Leap-Motion-3D-Navigation/blob/main/LICENSE).
