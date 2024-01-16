@@ -7,13 +7,14 @@ https://github.com/FabioMiguel2000/Leap-Motion-3D-Navigation/assets/100025288/e6
 ## User Interface
 
 <p align="center">
-   <img width="412" alt="user_interface_img" src="https://github.com/FabioMiguel2000/blob/main/img/user_interface.png">
+   <img width="600" alt="user_interface_img" src="https://github.com/FabioMiguel2000/WeLeap/blob/main/img/user_interface.png">
 </p>
+
 
 ## Architecture
 
 <p align="center">
-   <img width="412" alt="architecture_diagram" src="https://github.com/FabioMiguel2000/blob/main/img/architecture_diagram.png">
+   <img width="600" alt="architecture_diagram" src="https://github.com/FabioMiguel2000/WeLeap/blob/main/img/architecture_diagram.png">
 </p>
 
 ## Pre-requisites
