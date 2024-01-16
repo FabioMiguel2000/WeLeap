@@ -1,18 +1,25 @@
-# 3DUI-Challenge
+# WeLeap
 
 Our work explores the utilization of Leap Motion technology to design an experimental navigation system intended for virtual 3D environments. We integrate 5-DOF movement using hand gestures and devise a more intricate solution that demands greater levels of coordination.
 
 https://github.com/FabioMiguel2000/Leap-Motion-3D-Navigation/assets/100025288/e61a77a7-7030-4301-96cc-4656e0c1036b
 
-## Pre-requisites
-- Leap Motion Controller (hardware)
-- Ultraleap Hand Tracking Service - v5 (software)
-
 ## User Interface
 
 <p align="center">
-   <img width="412" alt="image" src="https://github.com/FabioMiguel2000/blob/main/img/user_interface.png">
+   <img width="412" alt="user_interface_img" src="https://github.com/FabioMiguel2000/blob/main/img/user_interface.png">
 </p>
+
+## Architecture
+
+<p align="center">
+   <img width="412" alt="architecture_diagram" src="https://github.com/FabioMiguel2000/blob/main/img/architecture_diagram.png">
+</p>
+
+## Pre-requisites
+- Leap Motion Controller (hardware)
+- Ultraleap Hand Tracking Service - v5 (software)
+- Unity Editor 2022.3.11f1.
 
 
 ## Navigation Control
